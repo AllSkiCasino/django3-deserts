@@ -1,0 +1,36 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+
+<h1>All Blogs</h1>
+<h2>Binky bonk bang = {{ blogs.count}} sausage{{ blogs.count|pluralize }}</h2>
+
+<div class="row">
+{% for blog in blogs %}
+
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header">
+        Featured
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <p class="card-text">{{ blog.description|striptags|truncatechars:120 }}</p>
+        <a href="{% url 'blog:detail' blog.id %}" class="btn btn-primary">Read more...</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ blog.date|date:'M d Y'|upper }}
+        </div>
+        </div>
+    </div>
+
+  <!--
+<a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+<h5>{{ blog.date|date:'M d Y'|upper }}</h3>
+<p>{{ blog.description|striptags|truncatechars:120 }}</p>
+-->
+
+{% endfor %}
+</div>
+
+{% endblock %}
